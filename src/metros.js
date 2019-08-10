@@ -85,7 +85,7 @@ function getGetStations(id){
           break
 
         case 'nycmta':
-          await csv().fromString( ( await axios.get( '/static/nycmta.csv' ) ).data )
+          await csv().fromString( ( await axios.get( '/metro/static/nycmta.csv' ) ).data )
             .then((response)=>{
               response.forEach((station)=>{
                 addStation(
@@ -98,7 +98,7 @@ function getGetStations(id){
           break
           
         case 'phlsepta':
-          await axios.get('/static/phlsepta.json')
+          await axios.get('/metro/static/phlsepta.json')
             .then((response)=>{
               response.data.forEach((station)=>{
                 addStation(
