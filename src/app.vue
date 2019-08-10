@@ -10,8 +10,8 @@
     >
 
       <gmap-marker
-        v-for="(station,id) in stations"
-        :key="id"
+        v-for="(station,ind) in stations"
+        :key="ind"
         :position="station.coords"
         :clickable="true"
         :draggable="false"
