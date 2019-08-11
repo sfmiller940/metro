@@ -4,14 +4,14 @@ import Vue from 'vue'
 import App from './app'
 import AsyncComputed from 'vue-async-computed'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import {apiKey} from './config'
+import config from './config'
 
 Vue.config.productionTip = false
 
 Vue.use(AsyncComputed) 
 Vue.use(VueGoogleMaps, { 
   load: {
-    key: 'AIzaSyD6wFBJeiaPDku5vh-OSuR-YJRhWrbWQd4',
+    key: config.apiKey,
   },
 })
 
