@@ -33,11 +33,11 @@ let metros = {
       lat: 41.8787,
       lng: -87.6403
     },
-    
+
     getStations: async ()=>{
       let stations = new Stations()
       let res = await axios.get('https://data.cityofchicago.org/resource/8pix-ypme.json')
-      res.data.forEach((station)=>{
+      res.data.forEach( station => {
         stations.addStation( new Station(
           station.stop_id,
           station.stop_name,
@@ -61,9 +61,9 @@ let metros = {
     getStations: async ()=>{
       let stations = new Stations()
       let res = await axios.get('https://api.metro.net/agencies/lametro-rail/routes')
-      res.data.items.forEach( async (route) => {
+      res.data.items.forEach( async route => {
         res = await axios.get('https://api.metro.net/agencies/lametro-rail/routes/'+route.id+'/stops')
-        res.data.items.forEach((station) => {
+        res.data.items.forEach( station => {
           stations.addStation( new Station(
             station.id,
             station.display_name,
@@ -88,7 +88,7 @@ let metros = {
     getStations: async ()=>{
       let stations = new Stations()
       let res = await csv().fromString( ( await axios.get( '/metro/static/nycmta.csv' ) ).data )
-      res.forEach((station)=>{
+      res.forEach( station => {
         stations.addStation( new Station(
           station['Station ID'],
           station['Stop Name'],
@@ -112,7 +112,7 @@ let metros = {
     getStations: async ()=>{
       let stations = new Stations()
       let res = await axios.get('/metro/static/phlsepta.json')
-      res.data.forEach((station)=>{
+      res.data.forEach( station => {
         stations.addStation( new Station(
           station.location_id, 
           station.location_name,
