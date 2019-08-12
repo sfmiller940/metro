@@ -87,7 +87,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await csv().fromString( ( await axios.get( '/metro/static/nycmta.csv' ) ).data )
+      let res = await csv().fromString( ( await axios.get( '/metro/static/data/nycmta.csv' ) ).data )
       res.forEach( station => {
         stations.addStation( new Station(
           station['Station ID'],
@@ -111,7 +111,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get('/metro/static/phlsepta.json')
+      let res = await axios.get('/metro/static/data/phlsepta.json')
       res.data.forEach( station => {
         stations.addStation( new Station(
           station.location_id, 
