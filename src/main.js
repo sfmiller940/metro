@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 Vue.use(AsyncComputed) 
 Vue.use(VueGoogleMaps, { 
   load: {
-    key: config.apiKey,
+    key: config.gmapKey,
   },
 })
 

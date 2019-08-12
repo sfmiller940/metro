@@ -2,15 +2,32 @@
 
 > Metro Transit with Google Maps and Vue
 
-## Build Setup
+## Installation
 
-``` bash
+```bash
 # install dependencies
 npm install
+```
 
+## Configuration
+
+Create a file `src/config.js` containing the following:
+
+```javascript
+export default{
+    gmapKey: 'YOUR_GMAP_API_KEY',
+}
+```
+
+## Development Server
+
+```bash
 # serve with hot reload at localhost:8080
 npm run dev
+```
+## Production Build
 
+```bash
 # build for production with minification
 npm run build
 
