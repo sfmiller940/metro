@@ -49,6 +49,31 @@ let metros = {
     },
   },
 
+  'houmetro':{
+    id: 'houmetro',
+    name: 'METRORail',
+    city: 'Houston',
+    coords: {
+      lat: 29.7573,
+      lng: -95.3646
+    },
+
+    getStations: async ()=>{
+      let stations = new Stations()
+      let res = await axios.get('/metro/static/data/houmetro.geojson')
+      console.log(res)
+      res.data.features.forEach( async station => {
+        stations.addStation( new Station(
+          station.properties.OBJECTID,
+          station.properties.Stat_Name,
+          station.geometry.coordinates[1], 
+          station.geometry.coordinates[0]
+        ))                
+      })
+      return stations.stations
+    },
+  },
+
   'lametro':{
     id: 'lametro',
     name: 'Metro',
