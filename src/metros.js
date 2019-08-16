@@ -61,7 +61,6 @@ let metros = {
     getStations: async ()=>{
       let stations = new Stations()
       let res = await axios.get('/metro/static/data/houmetro.geojson')
-      console.log(res)
       res.data.features.forEach( async station => {
         stations.addStation( new Station(
           station.properties.OBJECTID,
