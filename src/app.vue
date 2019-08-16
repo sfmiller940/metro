@@ -13,8 +13,10 @@
         v-for="(station,ind) in stations"
         :key="ind"
         :position="station.coords"
+        :title="station.name"
         :clickable="true"
         :draggable="false"
+        :icon="{ url: '/metro/static/img/station.svg' }"
         @click="gmapObj.panTo(station.coords)"
       />
     </google-map>
@@ -39,7 +41,7 @@ export default {
 
   data:function(){
     return{
-      id: 'houmetro',
+      id: 'lametro',
       metros: metros,
       gmapObj:''
     }
