@@ -9,16 +9,15 @@
       style="width: 100%; height: 100%" 
     >
 
-      <gmap-marker
+      <gmap-custom-marker
         v-for="(station,ind) in stations"
         :key="ind"
-        :position="station.coords"
-        :title="station.name"
-        :clickable="true"
-        :draggable="false"
-        :icon="{ url: '/metro/static/img/station.svg' }"
-        @click="gmapObj.panTo(station.coords)"
-      />
+        :marker="station.coords"
+        :alignment="'center'"
+        @click.native="gmapObj.panTo(station.coords)"
+      >
+        <station-svg v-bind:station="station" />
+    </gmap-custom-marker>
     </google-map>
 
     <div id="id-select">
@@ -70,6 +69,7 @@ html, body, #app {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-size: 14px;
 }
 
 #id-select{

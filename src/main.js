@@ -2,8 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './app'
+import StationSVG from './components/stationSVG.vue'
 import AsyncComputed from 'vue-async-computed'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import GmapCustomMarker from 'vue2-gmap-custom-marker';
 import config from './config'
 
 Vue.config.productionTip = false
@@ -16,7 +18,10 @@ Vue.use(VueGoogleMaps, {
 })
 
 Vue.component('google-map', VueGoogleMaps.Map)  
-Vue.component('gmap-marker',VueGoogleMaps.GmapMarker)
+Vue.component('gmap-marker', VueGoogleMaps.GmapMarker)
+Vue.component('gmap-custom-marker', GmapCustomMarker)
+Vue.component('station-svg', StationSVG)
+
 
 /* eslint-disable no-new */
 new Vue({
