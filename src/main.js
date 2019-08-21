@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './app'
-import StationSVG from './components/stationSVG.vue'
+import StationSVG from './components/StationSVG.vue'
 import AsyncComputed from 'vue-async-computed'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import GmapCustomMarker from 'vue2-gmap-custom-marker';
