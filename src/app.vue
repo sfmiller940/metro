@@ -8,7 +8,6 @@
       :map-type-id="'hybrid'"
       style="width: 100%; height: 100%" 
     >
-
       <gmap-custom-marker
         v-for="(station,ind) in stations"
         :key="ind"
@@ -17,7 +16,7 @@
         @click.native="gmapObj.panTo(station.coords)"
       >
         <station-svg v-bind:station="station" />
-    </gmap-custom-marker>
+      </gmap-custom-marker>
     </google-map>
 
     <div id="id-select">
