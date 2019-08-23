@@ -9,16 +9,21 @@ describe('metros Object', () => {
   })
   test('has station ids as keys',()=>{
     for( let id in metros ){
-      expect(id).toBe(metros[id].id)
+      expect(metros[id].id).toBe(id)
     }    
   })
   test('contains station properties',()=>{
     for( let id in metros ){
-      expect(typeof metros[id].name).toBe('string')
-      expect(typeof metros[id].city).toBe('string')
-      expect(typeof metros[id].coords.lat).toBe('number')
-      expect(typeof metros[id].coords.lng).toBe('number')
-      expect(typeof metros[id].getStations).toBe('function')
+      expect(metros[id]).toMatchSnapshot({
+        id: expect.any(Number),
+        name: expect.any(String),
+        city: expect.any(String),
+        coords:{
+          lat: expect.any(Number),
+          lng: expect.any(Number),
+        },
+        getStations: expect.any(Function)
+      })
     }     
   })
 })
