@@ -1,3 +1,4 @@
+import config from './config'
 import axios from 'axios'
 import csv from 'csvtojson'
 
@@ -143,6 +144,32 @@ let metros = {
           parseFloat(station.location_lat), 
           parseFloat(station.location_lon)
         ))  
+      })
+      return stations.stations
+    },
+  },
+
+  'sfbart':{
+    id: 'sfbart',
+    name: 'BART',
+    city: 'San Francisco',
+    coords: {
+      lat: 37.7767,
+      lng: -122.3949
+    },
+
+    getStations: async ()=>{
+      let stations = new Stations()
+      //let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.bartKey +'&json=y')
+      let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y') // API key from BART website while ours is activated
+      console.log(res)
+      res.data.root.stations.station.forEach( station => {
+        stations.addStation( new Station(
+          station.abbr,
+          station.name,
+          parseFloat(station.gtfs_latitude), 
+          parseFloat(station.gtfs_longitude)
+        ))
       })
       return stations.stations
     },
