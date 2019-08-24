@@ -1,7 +1,7 @@
-import keys from './keys'
+import apiKeys from './apiKeys'
 
 let config = {
-  keys: keys,
+  apiKeys: apiKeys,
   testURL: ( process.env.NODE_ENV == 'test' ? 'http://localhost:8080' : '' )
 }
 

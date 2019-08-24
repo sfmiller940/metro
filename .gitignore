@@ -16,4 +16,4 @@ selenium-debug.log
 *.njsproj
 *.sln
 
-src/config/keys.js
+src/config/apiKeys.js
