@@ -160,8 +160,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      //let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.bartKey +'&json=y')
-      let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y') // API key from BART website while ours is activated
+      let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.bartKey +'&json=y')
       console.log(res)
       res.data.root.stations.station.forEach( station => {
         stations.addStation( new Station(
