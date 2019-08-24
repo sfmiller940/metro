@@ -61,10 +61,10 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get('/metro/static/data/houmetro.geojson')
+      let res = await axios.get(config.testURL + '/metro/static/data/houmetro.geojson')
       res.data.features.forEach( async station => {
         stations.addStation( new Station(
-          station.properties.OBJECTID,
+          station.properties.OBJECTID.toString(),
           station.properties.Stat_Name,
           station.geometry.coordinates[1], 
           station.geometry.coordinates[0]
@@ -112,7 +112,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await csv().fromString( ( await axios.get( '/metro/static/data/nycmta.csv' ) ).data )
+      let res = await csv().fromString( ( await axios.get(config.testURL + '/metro/static/data/nycmta.csv' ) ).data )
       res.forEach( station => {
         stations.addStation( new Station(
           station['Station ID'],
@@ -136,7 +136,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get('/metro/static/data/phlsepta.json')
+      let res = await axios.get(config.testURL + '/metro/static/data/phlsepta.json')
       res.data.forEach( station => {
         stations.addStation( new Station(
           station.location_id, 
@@ -161,7 +161,6 @@ let metros = {
     getStations: async ()=>{
       let stations = new Stations()
       let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.bartKey +'&json=y')
-      console.log(res)
       res.data.root.stations.station.forEach( station => {
         stations.addStation( new Station(
           station.abbr,

@@ -3,17 +3,11 @@ import metros from '../../../src/metros.js'
 
 describe('metros object', () => {
 
-  test('has typeof object',()=>{
+  test('is of type object',()=>{
     expect(typeof metros).toBe('object')
   })
 
-  test('has keys with typeof string', () => {
-    for( let id in metros ){
-      expect(typeof id).toBe('string')
-    }
-  })
-
-  test('has an object for each key', () => {
+  test('has properties of type object', () => {
     for( let id in metros ){
       expect(typeof metros[id]).toBe('object')
     }
@@ -33,6 +27,23 @@ describe('metro objects',()=>{
           lng: expect.any(Number),
         },
         getStations: expect.any(Function)
+      })
+    }     
+  })
+
+  test('get station objects with properties', async ()=>{
+    for( let id in metros ){
+      let stations = await metros[id].getStations()
+      expect(typeof stations).toBe('object')
+      stations.forEach( station => {
+        expect(station).toMatchObject({
+          id: expect.any(String),
+          name: expect.any(String),
+          coords:{
+            lat: expect.any(Number),
+            lng: expect.any(Number),
+          }        
+        })
       })
     }     
   })
