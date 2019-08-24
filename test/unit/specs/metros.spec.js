@@ -1,21 +1,31 @@
 import { mount } from '@vue/test-utils'
 import metros from '../../../src/metros.js'
 
-describe('metros Object', () => {
-  test('has keys of type string', () => {
+describe('metros object', () => {
+
+  test('has typeof object',()=>{
+    expect(typeof metros).toBe('object')
+  })
+
+  test('has keys with typeof string', () => {
     for( let id in metros ){
       expect(typeof id).toBe('string')
     }
   })
-  test('has station ids as keys',()=>{
+
+  test('has an object for each key', () => {
     for( let id in metros ){
-      expect(metros[id].id).toBe(id)
-    }    
+      expect(typeof metros[id]).toBe('object')
+    }
   })
-  test('contains station properties',()=>{
+})
+
+describe('metro objects',()=>{
+
+  test('have properties',()=>{
     for( let id in metros ){
-      expect(metros[id]).toMatchSnapshot({
-        id: expect.any(Number),
+      expect(metros[id]).toMatchObject({
+        id: id,
         name: expect.any(String),
         city: expect.any(String),
         coords:{
