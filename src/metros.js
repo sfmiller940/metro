@@ -2,6 +2,10 @@ import config from './config'
 import axios from 'axios'
 import csv from 'csvtojson'
 
+const axs = axios.create({
+  baseURL: ( process.env.NODE_ENV == 'test' ? config.testURL : '' )
+})
+
 class Station{
   constructor(id,name,lat,lng){
     this.id = id
@@ -37,7 +41,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get('https://data.cityofchicago.org/resource/8pix-ypme.json')
+      let res = await axs.get('https://data.cityofchicago.org/resource/8pix-ypme.json')
       res.data.forEach( station => {
         stations.addStation( new Station(
           station.stop_id,
@@ -61,7 +65,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get(config.testURL + '/metro/static/data/houmetro.geojson')
+      let res = await axs.get('/metro/static/data/houmetro.geojson')
       res.data.features.forEach( async station => {
         stations.addStation( new Station(
           station.properties.OBJECTID.toString(),
@@ -85,9 +89,9 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get('https://api.metro.net/agencies/lametro-rail/routes')
+      let res = await axs.get('https://api.metro.net/agencies/lametro-rail/routes')
       res.data.items.forEach( async route => {
-        res = await axios.get('https://api.metro.net/agencies/lametro-rail/routes/'+route.id+'/stops')
+        res = await axs.get('https://api.metro.net/agencies/lametro-rail/routes/'+route.id+'/stops')
         res.data.items.forEach( station => {
           stations.addStation( new Station(
             station.id,
@@ -112,7 +116,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await csv().fromString( ( await axios.get(config.testURL + '/metro/static/data/nycmta.csv' ) ).data )
+      let res = await csv().fromString( ( await axs.get( '/metro/static/data/nycmta.csv' ) ).data )
       res.forEach( station => {
         stations.addStation( new Station(
           station['Station ID'],
@@ -136,7 +140,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get(config.testURL + '/metro/static/data/phlsepta.json')
+      let res = await axs.get('/metro/static/data/phlsepta.json')
       res.data.forEach( station => {
         stations.addStation( new Station(
           station.location_id, 
@@ -160,7 +164,7 @@ let metros = {
 
     getStations: async ()=>{
       let stations = new Stations()
-      let res = await axios.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.apiKeys.bart +'&json=y')
+      let res = await axs.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.apiKeys.bart +'&json=y')
       res.data.root.stations.station.forEach( station => {
         stations.addStation( new Station(
           station.abbr,
