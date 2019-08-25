@@ -28,7 +28,7 @@ class Stations{
   }
 }
 
-let metros = {
+const metros = {
 
   'chicta':{
     id: 'chicta',

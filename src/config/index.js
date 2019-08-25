@@ -1,6 +1,6 @@
 import apiKeys from './apiKeys'
 
-let config = {
+const config = {
   apiKeys: apiKeys,
   testURL: 'http://localhost:8080'
 }
