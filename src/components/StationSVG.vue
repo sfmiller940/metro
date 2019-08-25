@@ -5,9 +5,9 @@
     </div>
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 401 376.22788"
+        viewBox="0 0 480 480"
         :height="20"
-        :width="15"
+        :width="20"
         :aria-labelledby="station.name"
         role="presentation"
         style="padding: 0; margin: 0;"
@@ -16,11 +16,18 @@
           :id="station.id"
           lang="en"
         >{{ station.name }}</title>
+
+        <defs>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="black" flood-opacity="1" />
+          </filter>
+        </defs>
+
         <g transform="translate(-0.44606603,-678.65643)">
           <path
            :id="station.id"
-           d="m 100.94607,1054.3843 c 10e-6,-85.69081 31.12917,-140.00004 100,-140.00004 68.87083,0 100,54.30923 100,140.00004 l 100,0 0,-240.00004 -150,0 0,-90.59212 -50,-44.44812 -50,50.20992 0.823,84.83032 -150.82300397,0 0,240.00004 z"
-           style="fill:white;fill-opacity:1;stroke:black;stroke-opacity:1;stroke-width:60;" />
+           d="m 100.70352,1054.3694 c 1e-5,-91.10916 31.04903,-148.85244 99.74255,-148.85244 68.69352,0 99.74255,57.74328 99.74255,148.85244 l 99.74254,0 0,-255.17559 -149.61382,0 0,-96.32039 -49.87127,-47.25864 -49.87128,53.38477 0.82089,90.19426 -150.4347125,0 0,255.17559 z"
+           style="fill:white;fill-opacity:1;stroke:black;stroke-opacity:0;stroke-width:0;filter:url(#shadow);" />
         </g>
       </svg>
     </div>
