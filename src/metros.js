@@ -40,16 +40,16 @@ const metros = {
     },
 
     getStations: async ()=>{
-      let stations = new Stations()
-      let res = await axs.get('https://data.cityofchicago.org/resource/8pix-ypme.json')
-      res.data.forEach( station => {
-        stations.addStation( new Station(
-          station.stop_id,
-          station.stop_name,
-          parseFloat(station.location.latitude), 
-          parseFloat(station.location.longitude)
-        ))
-      })
+      let stations = new Stations();
+      (await axs.get('https://data.cityofchicago.org/resource/8pix-ypme.json'))
+        .data.forEach( station => {
+          stations.addStation( new Station(
+            station.stop_id,
+            station.stop_name,
+            parseFloat(station.location.latitude), 
+            parseFloat(station.location.longitude)
+          ))
+        })
       return stations.stations
     },
   },
@@ -63,17 +63,17 @@ const metros = {
       lng: -95.3646
     },
 
-    getStations: async ()=>{
-      let stations = new Stations()
-      let res = await axs.get('/metro/static/data/houmetro.geojson')
-      res.data.features.forEach( async station => {
-        stations.addStation( new Station(
-          station.properties.OBJECTID.toString(),
-          station.properties.Stat_Name,
-          station.geometry.coordinates[1], 
-          station.geometry.coordinates[0]
-        ))                
-      })
+    getStations: async () => {
+      let stations = new Stations();
+      (await axs.get('/metro/static/data/houmetro.geojson'))
+        .data.features.forEach( async station => {
+          stations.addStation( new Station(
+            station.properties.OBJECTID.toString(),
+            station.properties.Stat_Name,
+            station.geometry.coordinates[1], 
+            station.geometry.coordinates[0]
+          ))                
+        })
       return stations.stations
     },
   },
@@ -88,19 +88,19 @@ const metros = {
     },
 
     getStations: async ()=>{
-      let stations = new Stations()
-      let res = await axs.get('https://api.metro.net/agencies/lametro-rail/routes')
-      res.data.items.forEach( async route => {
-        res = await axs.get('https://api.metro.net/agencies/lametro-rail/routes/'+route.id+'/stops')
-        res.data.items.forEach( station => {
-          stations.addStation( new Station(
-            station.id,
-            station.display_name,
-            station.latitude, 
-            station.longitude
-          ))                
+      let stations = new Stations();
+      (await axs.get('https://api.metro.net/agencies/lametro-rail/routes'))
+        .data.items.forEach( async route => {
+          (await axs.get('https://api.metro.net/agencies/lametro-rail/routes/'+route.id+'/stops'))
+            .data.items.forEach( station => {
+              stations.addStation( new Station(
+                station.id,
+                station.display_name,
+                station.latitude, 
+                station.longitude
+              ))                
+            })
         })
-      })
       return stations.stations
     },
   },
@@ -115,16 +115,16 @@ const metros = {
     },
 
     getStations: async ()=>{
-      let stations = new Stations()
-      let res = await csv().fromString( ( await axs.get( '/metro/static/data/nycmta.csv' ) ).data )
-      res.forEach( station => {
-        stations.addStation( new Station(
-          station['Station ID'],
-          station['Stop Name'],
-          parseFloat(station['GTFS Latitude']),
-          parseFloat(station['GTFS Longitude'])
-        ))
-      })      
+      let stations = new Stations();
+      (await csv().fromString( ( await axs.get( '/metro/static/data/nycmta.csv' ) ).data ))
+        .forEach( station => {
+          stations.addStation( new Station(
+            station['Station ID'],
+            station['Stop Name'],
+            parseFloat(station['GTFS Latitude']),
+            parseFloat(station['GTFS Longitude'])
+          ))
+        })      
       return stations.stations
     },
   },
@@ -139,16 +139,16 @@ const metros = {
     },
 
     getStations: async ()=>{
-      let stations = new Stations()
-      let res = await axs.get('/metro/static/data/phlsepta.json')
-      res.data.forEach( station => {
-        stations.addStation( new Station(
-          station.location_id, 
-          station.location_name,
-          parseFloat(station.location_lat), 
-          parseFloat(station.location_lon)
-        ))  
-      })
+      let stations = new Stations();
+      (await axs.get('/metro/static/data/phlsepta.json'))
+        .data.forEach( station => {
+          stations.addStation( new Station(
+            station.location_id, 
+            station.location_name,
+            parseFloat(station.location_lat), 
+            parseFloat(station.location_lon)
+          ))  
+        })
       return stations.stations
     },
   },
@@ -163,16 +163,16 @@ const metros = {
     },
 
     getStations: async ()=>{
-      let stations = new Stations()
-      let res = await axs.get('http://api.bart.gov/api/stn.aspx?cmd=stns&key='+ config.apiKeys.sfbart +'&json=y')
-      res.data.root.stations.station.forEach( station => {
-        stations.addStation( new Station(
-          station.abbr,
-          station.name,
-          parseFloat(station.gtfs_latitude), 
-          parseFloat(station.gtfs_longitude)
-        ))
-      })
+      let stations = new Stations();
+      (await axs.get('http://api.bart.gov/api/stn.aspx?cmd=stns&json=y&key=' + config.apiKeys.sfbart))
+        .data.root.stations.station.forEach( station => {
+          stations.addStation( new Station(
+            station.abbr,
+            station.name,
+            parseFloat(station.gtfs_latitude), 
+            parseFloat(station.gtfs_longitude)
+          ))
+        })
       return stations.stations
     },
   }
