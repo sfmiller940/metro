@@ -9,14 +9,21 @@
 npm install
 ```
 
-## Configuration
+## API Keys
 
-Create a file `src/config.js` containing the following:
+Create a file `src/config/apiKeys.js` containing the following code:
 
 ```javascript
-export default{
-    gmapKey: 'YOUR_GMAP_API_KEY',
+const keys = {
+  nycmta: 'YOUR-NYC-METRO-API-KEY',
+  sfbart: 'YOUR-SANFRAN-BART-API-KEY',
+  gmap: ( process.env.NODE_ENV == 'development' 
+    ? 'YOUR-DEVELOPMENT-GOOGLE-MAPS-API-KEY' 
+    : 'YOUR-PRODUCTION-GOOGLE-MAPS-API-KEY'
+  )
 }
+
+export default keys
 ```
 
 ## Development Server
