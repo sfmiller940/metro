@@ -2,7 +2,7 @@ import apiKeys from './apiKeys'
 
 const config = {
   apiKeys: apiKeys,
-  testURL: 'http://localhost:8080'
+  testURL: 'http://www.poibella.org'
 }
 
 export default config
