@@ -1,12 +1,4 @@
-//import apiKeys from './apiKeys'
-
-let apiKeys = {}
-if(process.env.apiKeys){
-  apiKeys = JSON.parse(process.env.apiKeys)
-}
-else{
-  apiKeys = require('./apiKeys').default
-}
+const apiKeys = require('./apiKeys').default
 
 apiKeys.gmap = ( 
   process.env.NODE_ENV == 'development' ? apiKeys.gmap.dev :
