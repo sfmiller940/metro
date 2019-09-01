@@ -13,16 +13,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: npm install
-      run: npm install
     - name: create apiKeys.js
       run: echo "${{ secrets.apiKeys }}" > src/config/apiKeys.js
+    - name: npm install
+      run: npm install
     - name: npm run unit
-      env:
-        CI: true
-        apiKeys: ${{ secrets.apiKeys }}
       run: npm run unit
     - name: npm run build
-      env:
-        CI: true
       run: npm run build
