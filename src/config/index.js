@@ -1,9 +1,8 @@
 //import apiKeys from './apiKeys'
 
 let apiKeys = {}
-console.log(process.env)
-if(process.env.$apiKeys){
-  apiKeys = JSON.parse(process.env.$apiKeys)
+if(process.env.apiKeys){
+  apiKeys = JSON.parse(process.env.apiKeys)
 }
 else{
   apiKeys = require('./apiKeys').default
