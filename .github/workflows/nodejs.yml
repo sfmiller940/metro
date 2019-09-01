@@ -16,7 +16,7 @@ jobs:
     - name: npm install
       run: npm install
     - name: create apiKeys.js
-      run: echo ${{ secrets.apiKeys }} > src/config/apiKeys.js
+      run: echo "${{ secrets.apiKeys }}" > src/config/apiKeys.js
     - name: npm run unit
       env:
         CI: true
