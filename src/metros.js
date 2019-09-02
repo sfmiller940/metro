@@ -2,9 +2,7 @@ import config from './config'
 import axios from 'axios'
 import csv from 'csvtojson'
 
-const axs = axios.create({
-  baseURL: ( process.env.NODE_ENV == 'test' ? config.testURL : '' )
-})
+const axs = axios.create({ baseURL: config.baseURL })
 
 class Station{
   constructor(id,name,lat,lng){

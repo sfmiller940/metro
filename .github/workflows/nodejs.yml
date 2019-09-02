@@ -14,7 +14,7 @@ jobs:
       with:
         node-version: '12.x'
     - name: create apiKeys.js
-      run: echo '${{ secrets.apiKeys }}' > src/config/apiKeys.js
+      run: echo "${{ secrets.priv }}" > src/config/priv.js
     - name: npm install
       run: npm install
     - name: npm run unit

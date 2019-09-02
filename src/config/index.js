@@ -1,15 +1,17 @@
-const apiKeys = require('./apiKeys').default
+import { priv } from './priv'
 
-apiKeys.gmap = ( 
-  process.env.NODE_ENV == 'development' ? apiKeys.gmap.dev :
-    ( process.env.NODE_ENV == 'production' ? apiKeys.gmap.prod :
-      apiKeys.gmap.test
+priv.apiKeys.gmap = ( 
+  process.env.NODE_ENV == 'development' ? priv.apiKeys.gmap.dev :
+    ( process.env.NODE_ENV == 'production' ? priv.apiKeys.gmap.prod :
+      priv.apiKeys.gmap.test
     )
 )
 
+priv.baseURL = ( process.env.NODE_ENV == 'test' ? priv.testURL : '' )
+
 const config = {
-  apiKeys: apiKeys,
-  testURL: 'http://www.poibella.org'
+  apiKeys: priv.apiKeys,
+  baseURL: priv.baseURL
 }
 
 export default config
