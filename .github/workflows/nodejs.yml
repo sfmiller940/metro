@@ -13,11 +13,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: create priv.js
-      run: echo "${{ secrets.priv }}" > src/config/priv.js
     - name: npm install
       run: npm install
+    - name: create priv.js for unit
+      run: echo "${{ secrets.priv }}" > src/config/priv.js
     - name: npm run unit
       run: npm run unit
+    - name: create priv.js for build
+      run: echo "${{ secrets.privBuild }}" > src/config/priv.js
     - name: npm run build
       run: npm run build
