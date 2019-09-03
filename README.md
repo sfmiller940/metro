@@ -9,21 +9,23 @@
 npm install
 ```
 
-## API Keys
+## Private Configuration
 
-Create a file `src/config/apiKeys.js` containing the following code:
+Create a file `src/config/priv.js` containing the following code:
 
 ```javascript
-const keys = {
-  nycmta: 'YOUR-NYC-METRO-API-KEY',
-  sfbart: 'YOUR-SANFRAN-BART-API-KEY',
-  gmap: ( process.env.NODE_ENV == 'development' 
-    ? 'YOUR-DEVELOPMENT-GOOGLE-MAPS-API-KEY' 
-    : 'YOUR-PRODUCTION-GOOGLE-MAPS-API-KEY'
-  )
+export const priv = { 
+  testURL: 'http://localhost:8080', // URL of app for testing
+  apiKeys: {
+    nycmta: 'YOUR-API-KEY',
+    sfbart: 'YOUR-API-KEY',
+    gmap: {
+      dev: 'YOUR-DEV-API-KEY',   // Restrict this API key to developer IP addresses
+      prod: 'YOUR-PROD-API-KEY', // Restrict this API key to production doman
+      test: 'YOUR-TEST-API-KEY'  // Do not restrict this API key for GitHub Actions
+    }
+  }
 }
-
-export default keys
 ```
 
 ## Development Server
@@ -42,4 +44,6 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## CI/CD
+
+This repository uses [GitHub Actions](https://github.com/features/actions) for CI/CD. Workflows can be found at [`.github/workflows`](.github/workflows). The workflows require two secret variables `priv` and `privBuild` to be created in the GitHub repository settings. `priv` should contain the contents of the private configuration file `src/config/priv.js`. `privBuild` should also contain `src/config/priv.js` but without `testURL`, `gmap.dev`, and `gmap.test`.
