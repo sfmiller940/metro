@@ -23,3 +23,11 @@ jobs:
       run: echo "${{ secrets.privBuild }}" > src/config/priv.js
     - name: npm run build
       run: npm run build
+    - name: ftp deploy
+      uses: sebastianpopp/ftp-action@master
+      with:
+        host: ${{ secrets.FTP_HOST}}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "dist"
+        remoteDir: ${{ secrets.FTP_DIR }}
