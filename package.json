@@ -1,6 +1,6 @@
 {
   "name": "metro",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Metro Transit with Google Maps",
   "author": "sfmiller940 <sfmiller940@gmail.com>",
   "private": true,
