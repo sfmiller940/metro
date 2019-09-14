@@ -24,7 +24,7 @@ jobs:
     - name: npm run build
       run: npm run build
     - name: ftp deploy
-      uses: sebastianpopp/ftp-action@master
+      uses: sfmiller940/ftp-action@master
       with:
         host: ${{ secrets.FTP_HOST}}
         user: ${{ secrets.FTP_USERNAME }}
