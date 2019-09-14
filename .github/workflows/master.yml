@@ -1,0 +1,41 @@
+name: Node CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  install_test_build_deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: npm install
+      run: npm install
+
+    - name: npm run unit
+      run: |
+        echo "${{ secrets.priv }}" > src/config/priv.js
+        npm run unit
+
+    - name: npm run build
+      run: |
+        echo "${{ secrets.privBuild }}" > src/config/priv.js
+        npm run build
+
+    - name: ftp deploy
+      uses: sfmiller940/ftp-action@master
+      with:
+        host: ${{ secrets.FTP_HOST}}
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "dist"
+        remoteDir: ${{ secrets.FTP_DIR }}
