@@ -27,7 +27,7 @@ jobs:
     - name: upload build
       uses: actions/upload-artifact@v1
       with:
-        name: build
+        name: dist
         path: dist
 
 
@@ -40,12 +40,12 @@ jobs:
     - name: download build
       uses: actions/download-artifact@v1
       with:
-        name: build
+        name: dist
     - name: ftp deploy
       uses: sfmiller940/ftp-action@master
       with:
         host: ${{ secrets.FTP_HOST}}
         user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        localDir: "build/dist"
+        localDir: "dist"
         remoteDir: ${{ secrets.FTP_DIR }}
